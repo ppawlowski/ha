@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+images:
+  - name: fakeregistry/invo
+    newName: tempRegistry
+    newTag: tempTag
+
+secretGenerator:
+- name: db-secrets
+  literals:
+  - user=tempUser
+  - password=tempPassword
+  - host=tempHost
+  - database=tempDatabase

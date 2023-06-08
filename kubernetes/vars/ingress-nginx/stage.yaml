@@ -1,0 +1,6 @@
+controller:
+  ingressClassResource:
+    controllerValue: k8s.io/ingress-nginx
+    enabled: true
+    name: nginx
+  kind: DaemonSet

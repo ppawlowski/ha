@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: invo
+  template:
+    metadata:
+      labels:
+        app: invo
+    spec:
+      containers:
+      - name: myapp
+        image: fakeregistry/invo:latest
+        resources:
+          limits:
+            memory: "1G"
+            cpu: "500m"
+        env:
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: password
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: host
+          - name: DB_DBNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-secrets
+                key: database
+          - name: DB_ADAPTER
+            value: Mysql
+          - name: DB_CHARSET
+            value: utf8
+          - name: VIEWS_DIR
+            value: themes/invo/
+          - name: BASE_URI 
+            value: /
+        ports:
+        - containerPort: 80

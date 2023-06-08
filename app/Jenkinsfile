@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage("Clone Git Repository") {
+            steps {
+                git(
+                    url: "https://github.com/ppawlowski/ha.git",
+                    branch: "main",
+                )
+            }
+        }
+        stage("Build") {
+            steps {
+                sh 'make build-app'
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh "make deploy-app"
+            }
+        }
+    }
+}

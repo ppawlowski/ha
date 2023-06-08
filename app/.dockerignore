@@ -1,0 +1,6 @@
+**/.git
+**/.github
+**/docker
+**/tests
+**/.env.example
+**/app/**/.gitignore

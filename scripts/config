@@ -1,0 +1,8 @@
+required_tools=(git tfenv terraform aws helm kubectl)
+environments=(prod stage)
+
+infrastructure_directory=./infrastructure
+var_file_name="terraform.tfvars"
+
+application_directory=./app
+application_infrastructure_directory=./app/infrastructure
